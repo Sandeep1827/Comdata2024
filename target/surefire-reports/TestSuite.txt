@@ -1,0 +1,28 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 13, Failures: 6, Errors: 0, Skipped: 7, Time elapsed: 19.638 s <<< FAILURE! - in TestSuite
+accPageSetUp(com.qa.opencart.tests.AccountsPageTest)  Time elapsed: 19.207 s  <<< FAILURE!
+java.lang.NullPointerException
+	at com.qa.opencart.tests.AccountsPageTest.accPageSetUp(AccountsPageTest.java:14)
+
+PageTitleTest(com.qa.opencart.tests.LoginPageTest)  Time elapsed: 0.002 s  <<< FAILURE!
+java.lang.NullPointerException
+	at com.qa.opencart.tests.LoginPageTest.PageTitleTest(LoginPageTest.java:13)
+
+PageUrlTest(com.qa.opencart.tests.LoginPageTest)  Time elapsed: 0.001 s  <<< FAILURE!
+java.lang.NullPointerException
+	at com.qa.opencart.tests.LoginPageTest.PageUrlTest(LoginPageTest.java:21)
+
+PageForgotPwdTest(com.qa.opencart.tests.LoginPageTest)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.NullPointerException
+	at com.qa.opencart.tests.LoginPageTest.PageForgotPwdTest(LoginPageTest.java:28)
+
+LoginTest(com.qa.opencart.tests.LoginPageTest)  Time elapsed: 0.002 s  <<< FAILURE!
+java.lang.NullPointerException
+	at com.qa.opencart.tests.LoginPageTest.LoginTest(LoginPageTest.java:33)
+
+accPageSetUp(com.qa.opencart.tests.MenuListTest)  Time elapsed: 0.002 s  <<< FAILURE!
+java.lang.NullPointerException
+	at com.qa.opencart.tests.MenuListTest.accPageSetUp(MenuListTest.java:16)
+

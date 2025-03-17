@@ -1,0 +1,16 @@
+
+
+<suite name="Sample test Suite">
+   <test name="POM DATA TESTS">
+      <classes>
+         <!-- Corrected class reference without .java -->
+         <class name="com.qa.opencart.base.BaseTest"/>
+         
+         <!-- Including specific method if required -->
+         <!-- If you want to include a specific method, ensure it exists and use <include> correctly -->
+         <methods>
+            <include name="Samples"/> <!-- Reference to method name "Samples" in BaseTest -->
+         </methods>
+      </classes>
+   </test>
+</suite>
