@@ -1,10 +1,14 @@
 package com.qa.opencart.factory;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -16,6 +20,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class DriverFactory {
 	public WebDriver driver;
 	public Properties prop;
+	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<WebDriver>();
+
 	/**
 	 * This method is used for initialize the webdriver w.r.t to given browsername
 	 * this method will take care of local and remote execution
@@ -52,6 +58,10 @@ public class DriverFactory {
 		return driver;
 	}
 	
+	public static WebDriver getDriver() {
+		return tlDriver.get();
+	}
+	
 	/**
 	 * this method is used for intialise the properties on the basis of given environment
 	 * environment:-QA/DEV/Prod
@@ -67,7 +77,7 @@ public class DriverFactory {
 		System.out.println("Running tests on environment" + envName);
 		prop = new Properties();
 		if (envName==null) {
-			System.out.println("no env is given");
+			System.out.println("no env is given hence it is running in a QA");
 			try {
 			 ip =new FileInputStream("./src/test/resources/config/qa.config.properties"); 
 		}
@@ -107,6 +117,18 @@ public class DriverFactory {
 			e.printStackTrace();
 		}
 		return prop;
+	}
+	public static String getScreenshot() {
+		File srcFile = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.FILE);
+		String path = System.getProperty("user.dir") + "/screenshot/" + System.currentTimeMillis() + ".png";
+		File destination = new File(path);
+		try {
+			FileUtils.copyFile(srcFile, destination);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return path ;
+
 	}
 
 }

@@ -40,6 +40,11 @@
             <version>7.10.1</version>
             <scope>test</scope>
         </dependency>
+         <dependency>
+        <groupId>com.aventstack</groupId>
+        <artifactId>extentreports</artifactId>
+        <version>5.0.9</version> <!-- Use the latest stable version -->
+    </dependency>
     </dependencies>
 
     <build>
@@ -58,11 +63,24 @@
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.8.0</version>
+                    <configuration>
+                <source>1.8</source> <!-- Set Java source version -->
+                <target>1.8</target> <!-- Set Java target version -->
+            </configuration>
                 </plugin>
 
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>2.22.1</version>
+                    <configuration>
+                     <forkCount>2</forkCount> <!-- Number of processes to fork -->
+                     <reuseForks>true</reuseForks> <!-- Reuse the forked JVMs -->
+                     <!-- Pass additional JVM arguments (e.g., system properties, memory settings) -->
+                     
+                <suiteXmlFiles>
+                    <suiteXmlFile>src/test/resources/runners/testng_regression.xml</suiteXmlFile> <!-- Path to your TestNG suite XML -->
+                </suiteXmlFiles>
+                </configuration>
                 </plugin>
 
                 <plugin>
