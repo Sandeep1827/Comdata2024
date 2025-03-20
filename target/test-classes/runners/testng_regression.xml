@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Regression Suite" >
+<suite name="Regression Suite" parallel="tests">
 <listeners>
 		<listener
 			class-name="com.qa.opencart.listeners.ExtentReportListener" />
 	</listeners>
 	
   <test 
-     name="comdata login  test">
+     name="comdata login test">
     <classes>
       <class name="com.qa.opencart.tests.LoginPageTest"/>
     </classes>
