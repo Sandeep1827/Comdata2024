@@ -15,7 +15,6 @@ public class MenuList {
     By MenuClick = By.cssSelector("#frmAccountsLanding_customheader_topmenu_imgMenutest");
 	By AccountBankName = By.id("flxAccountListItem_lblAccountName");
 	private WebDriver driver;
-
 	
 	  public MenuList(WebDriver driver) 
 	  { 
