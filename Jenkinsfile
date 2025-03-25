@@ -1,45 +1,65 @@
-pipeline{
+pipeline 
+{
     agent any
-    stages{
-        stage("Build"){
-        steps{
-           echo("build the project") 
-             }
+    
+    tools{
+    	maven 'maven'
         }
-        stage("Unit"){
-        steps{
-           echo("Run Unit test cases") 
-             }
+
+    stages 
+    {
+        stage('Build') 
+        {
+            steps
+            {
+                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+            post 
+            {
+                success
+                {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts 'target/*.jar'
+                }
+            }
         }
-        stage("Deploy to Dev"){
-        steps{
-           echo("Dev deployement") 
-             }
-        }
+        
+        
         stage("Deploy to QA"){
-        steps{
-           echo("QA deployement") 
-             }
+            steps{
+                echo("deploy to qa")
+            }
         }
-         stage("Run my automation Regression test cases"){
-        steps{
-           echo("Regression test cases") 
-             }
+                
+        stage('Regression Automation Test') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    git 'https://github.com/Sandeep1827/Comdata2024'
+                    sh "mvn clean install"
+                    
+                }
+            }
         }
-         stage("Deploy to STage"){
-        steps{
-           echo("Stage deployement") 
-             }
+                
+        
+        
+        stage('Publish Extent Report'){
+            steps{
+                     publishHTML([allowMissing: false,
+                                  alwaysLinkToLastBuild: false, 
+                                  keepAll: false, 
+                                  reportDir: 'build', 
+                                  reportFiles: 'TestExecutionReport.html', 
+                                  reportName: 'HTML Extent Report', 
+                                  reportTitles: ''])
+            }
         }
-         stage("Run my automation Sanity test cases"){
-        steps{
-           echo("Sanity test cases") 
-             }
+        
+        stage("Deploy to PROD"){
+            steps{
+                echo("deploy to PROD")
+            }
         }
-        stage("Deploy to Prod"){
-        steps{
-           echo("Prod deployement") 
-             }
-        }   
     }
 }
